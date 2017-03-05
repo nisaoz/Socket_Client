@@ -1,0 +1,9 @@
+C:\Visual Studio 2015\Projects\Socket_Client\Socket_Client\bin\Debug\Socket_Client.exe.config
+C:\Visual Studio 2015\Projects\Socket_Client\Socket_Client\bin\Debug\Socket_Client.exe
+C:\Visual Studio 2015\Projects\Socket_Client\Socket_Client\bin\Debug\Socket_Client.pdb
+C:\Visual Studio 2015\Projects\Socket_Client\Socket_Client\obj\Debug\Socket_Client.Form1.resources
+C:\Visual Studio 2015\Projects\Socket_Client\Socket_Client\obj\Debug\Socket_Client.Properties.Resources.resources
+C:\Visual Studio 2015\Projects\Socket_Client\Socket_Client\obj\Debug\Socket_Client.csproj.GenerateResource.Cache
+C:\Visual Studio 2015\Projects\Socket_Client\Socket_Client\obj\Debug\Socket_Client.exe
+C:\Visual Studio 2015\Projects\Socket_Client\Socket_Client\obj\Debug\Socket_Client.pdb
+C:\Visual Studio 2015\Projects\Socket_Client\Socket_Client\obj\Debug\Socket_Client.csprojResolveAssemblyReference.cache
