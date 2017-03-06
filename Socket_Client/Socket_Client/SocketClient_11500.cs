@@ -14,8 +14,8 @@ namespace Socket_Client
         //connectport: Connect erver Port number 
         //screenPort: Screen sharing port number
         //port: local port address
-        private static string local_IP, server_IP = "192.168.0.28",
-            connectPort = "11500", PC_name, mac, screenPort, port, denemeport = "11501";
+        private static string local_IP, server_IP = "192.168.0.28", clientport,
+            connectPort = "11500", PC_name, mac;
 
         readonly static string fileName = "RemoteConnection_Client.exe";
         private readonly static string path = Path.Combine(Environment.CurrentDirectory, fileName);
@@ -34,6 +34,9 @@ namespace Socket_Client
                 ConnectLoop();
                 SendPCInfo();
                 WaitServer_Command();
+
+                client_socket.Dispose();
+                Environment.Exit(0);
             }
             catch (Exception ex)
             {
@@ -73,9 +76,6 @@ namespace Socket_Client
             buffer = Encoding.ASCII.GetBytes(info);
             client_socket.Send(buffer);
 
-            //client_socket.Close();
-            //client_socket.Dispose();
-            //Environment.Exit(0);
         }
 
         //Server'dan gelen komutları dinleme
@@ -95,6 +95,7 @@ namespace Socket_Client
 
                 if (request == "ekran")
                 {
+                    parseSocketInfo(client_socket.LocalEndPoint.ToString());
                     Start_EkranPaylas();
                 }
             }
@@ -102,11 +103,13 @@ namespace Socket_Client
             {
                 Console.WriteLine(ex.Message.ToString());
                 client_socket.Close();
+                Environment.Exit(0);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message.ToString());
                 client_socket.Close();
+                Environment.Exit(0);
             }
         }
 
@@ -116,11 +119,15 @@ namespace Socket_Client
             Process start_ClientRemote = new Process();
             try
             {
+                clientport = (Convert.ToInt32(clientport)+1).ToString(); //Screen sharing port will be portnumber+1
                 start_ClientRemote.StartInfo.FileName = path;
-                start_ClientRemote.StartInfo.Arguments = server_IP + ':' + denemeport;
+                start_ClientRemote.StartInfo.Arguments = server_IP + ':' + clientport;
                 start_ClientRemote.Start();
                 start_ClientRemote.WaitForExit();
-                return;
+
+                client_socket.Dispose();
+                start_ClientRemote.Kill();
+                start_ClientRemote.Dispose();
             }
             catch (Exception ex)
             {
@@ -128,6 +135,15 @@ namespace Socket_Client
                 start_ClientRemote.Kill();
                 start_ClientRemote.Dispose();
             }
+        }
+
+        //Client portunu al
+        private static void parseSocketInfo(string text)
+        {
+            char delimeter = ':';
+
+            string[] clientInfo = text.Split(delimeter);
+            clientport = clientInfo[1]; //client portunu al
         }
 
         private static string GetMACAddress()

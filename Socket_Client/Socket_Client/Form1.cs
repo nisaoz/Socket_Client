@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Socket_Client
@@ -18,7 +19,9 @@ namespace Socket_Client
 
             try
             {
-                SocketClient_11500.Start();
+                Thread th = new Thread(new ThreadStart(SocketClient_11500.Start));
+                th.Start();
+                //SocketClient_11500.Start();
             }
             catch (Exception ex)
             {
@@ -29,7 +32,8 @@ namespace Socket_Client
 
         private void notifyIcon_client_MouseClick(object sender, MouseEventArgs e)
         {
-            contextMenuStrip.Show(MousePosition);
+            if(e.Button == MouseButtons.Right)
+                contextMenuStrip.Show(MousePosition);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

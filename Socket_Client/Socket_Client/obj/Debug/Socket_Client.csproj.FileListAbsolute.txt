@@ -6,4 +6,3 @@ C:\Visual Studio 2015\Projects\Socket_Client\Socket_Client\obj\Debug\Socket_Clie
 C:\Visual Studio 2015\Projects\Socket_Client\Socket_Client\obj\Debug\Socket_Client.csproj.GenerateResource.Cache
 C:\Visual Studio 2015\Projects\Socket_Client\Socket_Client\obj\Debug\Socket_Client.exe
 C:\Visual Studio 2015\Projects\Socket_Client\Socket_Client\obj\Debug\Socket_Client.pdb
-C:\Visual Studio 2015\Projects\Socket_Client\Socket_Client\obj\Debug\Socket_Client.csprojResolveAssemblyReference.cache
