@@ -33,7 +33,10 @@ namespace Socket_Client
         private void notifyIcon_client_MouseClick(object sender, MouseEventArgs e)
         {
             if(e.Button == MouseButtons.Right)
+            {
                 contextMenuStrip.Show(MousePosition);
+                contextMenuStrip.AutoClose = true;
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

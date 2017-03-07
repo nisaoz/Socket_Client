@@ -17,8 +17,9 @@ namespace Socket_Client
         private static string local_IP, server_IP = "192.168.0.28", clientport,
             connectPort = "11500", PC_name, mac;
 
-        readonly static string fileName = "RemoteConnection_Client.exe";
-        private readonly static string path = Path.Combine(Environment.CurrentDirectory, fileName);
+        //readonly static string fileName = "RemoteConnection_Client.exe";
+        //private readonly static string path = Path.Combine(Environment.CurrentDirectory, fileName);
+        private readonly static string path2 = "C:\\Remote\\RemoteConnection_Client.exe";
 
         private static Socket client_socket = new Socket
             (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -32,11 +33,16 @@ namespace Socket_Client
             try
             {
                 ConnectLoop();
-                SendPCInfo();
-                WaitServer_Command();
-
-                client_socket.Dispose();
-                Environment.Exit(0);
+                if (client_socket.Connected)
+                {
+                    SendPCInfo();
+                    WaitServer_Command();
+                }
+                else
+                {
+                    client_socket.Dispose();
+                    Environment.Exit(0);
+                }
             }
             catch (Exception ex)
             {
@@ -75,7 +81,6 @@ namespace Socket_Client
             string info = "client_info:" + local_IP + ":" + PC_name + ":" + mac;
             buffer = Encoding.ASCII.GetBytes(info);
             client_socket.Send(buffer);
-
         }
 
         //Server'dan gelen komutları dinleme
@@ -120,7 +125,7 @@ namespace Socket_Client
             try
             {
                 clientport = (Convert.ToInt32(clientport)+1).ToString(); //Screen sharing port will be portnumber+1
-                start_ClientRemote.StartInfo.FileName = path;
+                start_ClientRemote.StartInfo.FileName = path2;
                 start_ClientRemote.StartInfo.Arguments = server_IP + ':' + clientport;
                 start_ClientRemote.Start();
                 start_ClientRemote.WaitForExit();
